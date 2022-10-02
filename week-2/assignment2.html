@@ -117,18 +117,45 @@
 
 
         // Mission 4
+        // Solution 1: O(n^2)
+        // function maxProduct(nums){
+        //     let max = -Infinity;
+        //     for (let i = 0; i < nums.length-1; i++){
+        //         for (let j=i+1; j < nums.length; j++ ) {
+        //             if (nums[i] * nums[j] > max) {
+        //                 max = nums[i] * nums[j];
+        //             }
+        //         }
+        //     };
+        //     console.log(max)
+        //     return max
+        // }
+
+        // Solution 2: 
         function maxProduct(nums){
-            let max = -Infinity;
-            for (let i = 0; i < nums.length-1; i++){
-                for (let j=i+1; j < nums.length; j++ ) {
-                    if (nums[i] * nums[j] > max) {
-                        max = nums[i] * nums[j];
-                    }
-                }
-            };
-            console.log(max)
-            return max
+            if (nums.length >= 2) {
+                let max = -Infinity;
+                max = maxSort(nums, max);
+                console.log(max)
+                return max;
+            } else {
+                consle.log('資料筆數不足2')
+            }
         }
+
+        function maxSort(nums, max) {
+            if (nums.length <= 1) {
+                return max
+            }
+            pivot = nums.pop();
+            nums.forEach(element => {
+                if (pivot * element > max) {
+                    max = pivot * element;
+                }
+            });
+            return maxSort(nums, max)
+        }
+
         maxProduct([5, 20, 2, 6]) // 得到 120
         maxProduct([10, -20, 0, 3]) // 得到 30
         maxProduct([10, -20, 0, -3]) // 得到 60
@@ -139,15 +166,27 @@
 
 
         // Mission 5
-        function twoSum(nums, target){
-            for (let i = 0; i < nums.length-1; i++){
-                for (let j=i+1; j < nums.length; j++ ) {
-                    if (nums[i] + nums[j] === target) {
-                        return [i, j]
-                    }
+        // function twoSum(nums, target){
+        //     for (let i = 0; i < nums.length-1; i++){
+        //         for (let j=i+1; j < nums.length; j++ ) {
+        //             if (  nums[i] + nums[j] === target) {
+        //                 return [i, j]
+        //             }
+        //         }
+        //     };
+        // }
+
+        function twoSum(nums, target) {
+            pivotIndex = nums.length - 1
+            pivot = nums.pop();
+            for (let i = 0; i < nums.length; i++){
+                if (pivot + nums[i] === target) {
+                    return [i, pivotIndex];
                 }
-            };
+            }
+            return twoSum(nums, target)
         }
+
         let result=twoSum([2, 11, 7, 15], 9);
         console.log(result); // show [0, 2] because nums[0]+nums[2] is 9
 
