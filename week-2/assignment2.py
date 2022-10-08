@@ -96,35 +96,35 @@ Problem 4
 #     else:
 #         print("列表筆數不足2")
 
-# Solution 2:
-def maxProduct(nums):
-    if len(nums) >= 2:
-        max_product = -float('inf')
-        print(max_sort(nums, max_product))
-    else:
-        print('資料筆數不足2')
-
-
-def max_sort(nums, max_product):
-    if len(nums) <= 1:
-        return max_product
-    pivot = nums.pop()
-
-    for num in nums:
-        if num * pivot > max_product:
-            max_product = num * pivot
-    return max_sort(nums, max_product)
-
-# Solution 3 & 4:
+# Solution 2: O(N^2)
 # def maxProduct(nums):
 #     if len(nums) >= 2:
-#         sorted_nums = merge_sort(nums)
-#         if sorted_nums[-1] * sorted_nums[-2] > sorted_nums[0] * sorted_nums[1]:
-#             print(sorted_nums[-1] * sorted_nums[-2])
-#         else:
-#             print(sorted_nums[0] * sorted_nums[1])
+#         max_product = -float('inf')
+#         print(max_sort(nums, max_product))
 #     else:
 #         print('資料筆數不足2')
+#
+#
+# def max_sort(nums, max_product):
+#     if len(nums) <= 1:
+#         return max_product
+#     pivot = nums.pop()
+#
+#     for num in nums:
+#         if num * pivot > max_product:
+#             max_product = num * pivot
+#     return max_sort(nums, max_product)
+
+# Solution 3 & 4:
+def maxProduct(nums):
+    if len(nums) >= 2:
+        sorted_nums = merge_sort(nums)
+        if sorted_nums[-1] * sorted_nums[-2] > sorted_nums[0] * sorted_nums[1]:
+            print(sorted_nums[-1] * sorted_nums[-2])
+        else:
+            print(sorted_nums[0] * sorted_nums[1])
+    else:
+        print('資料筆數不足2')
 
 
 # def quick_sort(nums):
@@ -143,32 +143,32 @@ def max_sort(nums, max_product):
 #     return quick_sort(smaller_lst) + [pivot] + quick_sort(greater_lst)
 #
 #
-# def merge_sort(nums):
-#     if len(nums) <= 1:
-#         return nums
-#
-#     mid = len(nums) // 2
-#
-#     left_lst, right_lst = merge_sort(nums[:mid]), merge_sort(nums[mid:])
-#
-#     return merge(left_lst, right_lst)
-#
-#
-# def merge(left_lst, right_lst):
-#     sorted_lst = []
-#     left_pointer = 0
-#     right_pointer = 0
-#     while left_pointer < len(left_lst) and right_pointer < len(right_lst):
-#         if left_lst[left_pointer] < right_lst[right_pointer]:
-#             sorted_lst.append(left_lst[left_pointer])
-#             left_pointer += 1
-#         else:
-#             sorted_lst.append(right_lst[right_pointer])
-#             right_pointer += 1
-#
-#     sorted_lst.extend(left_lst[left_pointer:])
-#     sorted_lst.extend(right_lst[right_pointer:])
-#     return sorted_lst
+def merge_sort(nums):
+    if len(nums) <= 1:
+        return nums
+
+    mid = len(nums) // 2
+
+    left_lst, right_lst = merge_sort(nums[:mid]), merge_sort(nums[mid:])
+
+    return merge(left_lst, right_lst)
+
+
+def merge(left_lst, right_lst):
+    sorted_lst = []
+    left_pointer = 0
+    right_pointer = 0
+    while left_pointer < len(left_lst) and right_pointer < len(right_lst):
+        if left_lst[left_pointer] < right_lst[right_pointer]:
+            sorted_lst.append(left_lst[left_pointer])
+            left_pointer += 1
+        else:
+            sorted_lst.append(right_lst[right_pointer])
+            right_pointer += 1
+
+    sorted_lst.extend(left_lst[left_pointer:])
+    sorted_lst.extend(right_lst[right_pointer:])
+    return sorted_lst
 
 
 maxProduct([5, 20, 2, 6]) # 得到 120
@@ -185,22 +185,22 @@ Problem 5
 """
 
 # Solution 1: O(n^2)
-# def twoSum(nums, target):
-#     for i in range(len(nums)-1):
-#         for j in range(i+1, len(nums)):
-#             if nums[i] + nums[j] == target:
-#                 return [i, j]
-
-# Solution 2 :
 def twoSum(nums, target):
-    pivot_index = len(nums) - 1
-    pivot = nums.pop()
+    for i in range(len(nums)-1):
+        for j in range(i+1, len(nums)):
+            if nums[i] + nums[j] == target:
+                return [i, j]
 
-    for i in range(len(nums)):
-        if pivot + nums[i] == target:
-            return [i, pivot_index]
-    return twoSum(nums, target)
-
+# Solution 2 : O(n^2)
+# def twoSum(nums, target):
+#     pivot_index = len(nums) - 1
+#     pivot = nums.pop()
+#
+#     for i in range(len(nums)):
+#         if pivot + nums[i] == target:
+#             return [i, pivot_index]
+#     return twoSum(nums, target)
+#
 
 result=twoSum([2, 11, 7, 15], 9)
 print(result)  # show [0, 2] because nums[0]+nums[2] is 9
