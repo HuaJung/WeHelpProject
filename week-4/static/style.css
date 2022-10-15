@@ -1,0 +1,182 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #d6d9fc98;
+  color: rgb(74, 74, 74);
+}
+
+header {
+  display: grid;
+  padding: 10px 20px;
+  align-items: center;
+  height: 70px;
+  background-image: linear-gradient(135deg, rgba(105, 109, 230, 0.728), #f1b8f8db);
+  margin-bottom: 30px;
+  box-shadow: 0 0 3px 3px rgb(203, 208, 228) ;
+}
+
+.fa-moon, .fa-circle-half-stroke{
+  font-size: 40px;
+  color: #fff;
+}
+
+.logo1 {
+  grid-column: 1/2;
+}
+
+.logo2 {
+  grid-column: 3/4;
+  text-align: end;
+}
+
+h1 {
+  color: #fff;
+  grid-column: 2/3;
+  text-align: center;
+}
+
+.container {
+  display: grid; 
+  grid-template-columns: 1fr minmax(300px, 400px) 1fr;
+  padding: 20px;
+}
+
+.col {
+  grid-column: 2/3;
+  background-color: #d6d9fc98;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 0px 35px 5px #b1b5da98;
+  margin-bottom: 50px;
+  line-height: 1.5;
+}
+
+.title-icon {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title-icon i{
+  color: rgba(116, 80, 223, 0.904);
+  font-size: 40px;
+}
+
+h2 {
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+
+}
+
+label {
+  padding: 0 5px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 2;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  border-radius: 20px ;
+  border: none;
+  box-shadow: 0 0 15px #b1b5da98;
+  padding: 5px 15px;
+  font-size: 15px;
+}
+.icon {
+    position: relative;
+}
+
+.fa-user, .fa-lock, .fa-arrow-up-9-1 {
+    position: absolute;
+    top: 35%;
+    right: 15px;
+    color: rgb(173, 173, 173);
+    font-size: small;
+}
+
+input:focus ~ i {
+    color: rgb(66, 71, 212);
+}
+
+a {
+  color: #3c4381c9;
+}
+
+.forget{
+  font-size: 13px;
+  padding-left: 5px;
+}
+
+.btn {
+  width: 120px;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.btn a {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  text-decoration: none;
+  background-color: rgba(39, 39, 164, 0.638);
+  border-radius: 20px;
+  color: #eeee;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all .4s ease;
+}
+
+.btn a:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  background-color: #8088cef6;
+}
+
+input[type=submit] {
+  font-size: 16px;
+  color: #eeee;
+  background-color: rgba(39, 39, 164, 0.638);
+  font-weight: 500;
+  transition: all .4s ease;
+}
+
+input[type=submit]:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  background-color: #8088cef6;
+}
+
+.register {
+  font-size: 13px;
+  text-align: center;
+}
+
+p {
+  padding: 0 20px;
+  text-align: center;
+}
+
+
+/* Hide Input Number Arrows */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button,
+input::-webkit-credentials-auto-fill-button {
+  -webkit-appearance: none;
+  /* Hide Input text and password key icon */
+  visibility: hidden;   
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

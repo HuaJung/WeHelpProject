@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block content1 %}
+    <h2><i class="fa-regular fa-circle-user"></i>  Sign In</h2>
+    <form action="/signin" method="POST">
+        <label for="account">Account:</label>
+        <div class="icon">
+            <input type="text" id="account" name="account" placeholder="account">
+            <i class="fa-solid fa-user"></i>
+        </div><br>
+        <label for="pwd">Password:</label>
+        <div class="icon">
+            <input type="password" id="pwd" name="pwd" placeholder="password">
+            <i class="fa-solid fa-lock"></i>
+        </div>
+        <a href="/register" class="forget">forget password?</a>
+        <br><br>
+        <div class="btn">
+            <input type="submit" value="Login Now">
+        </div>
+        <div class="register">
+            <span>Not Register Yet? </span>
+            <a href="/register">Sign Up</a>
+        </div>
+    </form>
+{% endblock %}
+
+{% block content2 %}
+<div class="col">
+    <div class="calculator">
+        <h2><i class="fa-regular fa-calculator"></i>  Perfect Square Calculator</h2>
+        <form action="/cal">
+            <label for="square">Your Number:</label>
+            <div class="icon">
+                <input type="number" placeholder="please enter an integer number" min="1" step="1" name="num">
+                <i class="fa-regular fa-arrow-up-9-1"></i>
+            </div>
+            <br><br>
+            <div class="btn">
+                <input type="submit" value="Calculate">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

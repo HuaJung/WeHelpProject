@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+<title>{% block title %} Error {% endblock %}</title>
+
+
+{% block content1 %}
+<div class="title-icon">
+    <i class="fa-solid fa-face-dizzy"></i>
+</div>
+    <h2>{{message}}</h2>
+
+<div class="btn">
+    <a href="/">Back</a>
+</div>
+{% endblock %}
