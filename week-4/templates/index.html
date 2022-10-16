@@ -30,17 +30,19 @@
 <div class="col">
     <div class="calculator">
         <h2><i class="fa-regular fa-calculator"></i>  Perfect Square Calculator</h2>
-        <form action="/cal">
-            <label for="square">Your Number:</label>
-            <div class="icon">
-                <input type="number" placeholder="please enter an integer number" min="1" step="1" name="num">
-                <i class="fa-regular fa-arrow-up-9-1"></i>
-            </div>
-            <br><br>
-            <div class="btn">
-                <input type="submit" value="Calculate">
-            </div>
-        </form>
+        <label for="square">Your Number:</label>
+        <div class="icon">
+            <input type="number" placeholder="please enter an integer number" min="1" step="1" id="num">
+            <i class="fa-regular fa-arrow-up-9-1"></i>
+        </div>
+        <br><br>
+        <div class="btn">
+            <a href='#' id="square-btn">Calculate</a>
+        </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script src="{{url_for('static', filename='app.js')}}"></script>
 {% endblock %}

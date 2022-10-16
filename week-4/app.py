@@ -53,13 +53,6 @@ def sign_out():
     return redirect('/')
 
 
-# making a redirect route to get the variable
-@app.route('/cal')
-def cal():
-    num = request.args.get('num')
-    return redirect(url_for('square', number=num))
-
-
 @app.route('/square/<int:number>')
 def square(number):
     number = number**2
