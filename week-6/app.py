@@ -24,12 +24,14 @@ def signup():
         name = form.name.data
         username = form.username.data
         pwd = form.password.data
-        repeat_username = data_query_one(f'SELECT * FROM member WHERE username="{username}"')
+        username_query = 'SELECT * FROM member WHERE username = %s'
+        repeat_username = data_query_one(username_query, (username,))
         if repeat_username:
             query_str = '?message=usernameexists'
             return redirect('/error' + query_str)
         else:
-            insert_or_update(f'INSERT INTO member(name, username, password) VALUES("{name}","{username}","{pwd}")')
+            insert_member = 'INSERT INTO member (name, username, password) VALUES (%s, %s, %s)'
+            insert_or_update(insert_member, (name, username, pwd))
             flash('Thanks for registering. You can login now!', 'success')
             return redirect('/')
     return redirect('/')
@@ -39,7 +41,8 @@ def signup():
 def signin():
     username = request.form['username']
     pwd = request.form['password']
-    record = data_query_one(f'SELECT * FROM member WHERE username="{username}" and password="{pwd}"')
+    member_query = 'SELECT * FROM member WHERE username = %s AND password = %s'
+    record = data_query_one(member_query, (username, pwd))
     if record:
         session['user_id'] = record[0]
         return redirect('member')
@@ -53,10 +56,11 @@ def member():
     form = MessageForm()
     if 'user_id' in session:
         user_id = session['user_id']
-        name = data_query_one(f'SELECT * FROM member WHERE id="{user_id}"')[1]
-        member_message_sql = f'SELECT member.name, message.content FROM member ' \
-                           f'INNER JOIN message ON member.id=message.member_id'
-        members_messages = data_query_all(member_message_sql)
+        name_query = 'SELECT * FROM member WHERE id = %s'
+        message_query = ''' SELECT member.name, message.content FROM member 
+                        INNER JOIN message ON member.id = message.member_id'''
+        name = data_query_one(name_query, (user_id,))[1]
+        members_messages = data_query_all(message_query)
         return render_template('member.html', name=name, form=form, header='MEMBER', record=members_messages)
     else:
         flash('You have been logged out. Try login again!', 'warning')
@@ -86,8 +90,8 @@ def signout():
 def message():
     content = request.form['content']
     user_id = session['user_id']
-    sql = f'INSERT INTO message(member_id, content) VALUES("{user_id}", "{content}")'
-    insert_or_update(sql)
+    insert_message = 'INSERT INTO message(member_id, content) VALUES( %s, %s)'
+    insert_or_update(insert_message, (user_id, content))
     return redirect('/member')
 
 
