@@ -1,0 +1,21 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+
+.card-title .bi-heart-arrow:first-child:before {
+    content: "<i class="bi bi-heart-arrow"></i>";
+    transform: rotate(180deg);
+}
+
+.form-group .bi::before {
+    position: absolute;
+    top: 60%;
+    right: 20px;
+}
+
+/* bootstrap only have % for top distance, making greeting shifting */
+.greeting {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+}

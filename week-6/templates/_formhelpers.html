@@ -1,0 +1,18 @@
+{% macro render_field(field) %}
+  
+  <div class="form-group position-relative mb-4">
+    <!-- insert font icon for fields -->
+    {% if 'Name' in field.label|safe %}
+      <i class="bi bi-person-fill"></i>
+    {% elif 'Account' in field.label|safe %}
+      <i class="bi bi-incognito"></i>
+    {% elif 'Password' in field.label|safe %}
+      <i class="bi bi-lock-fill"></i>
+    {% endif %}
+
+    {{ field.label(class='form-label fw-bolder mb-1')|safe }}
+    {{ field(class='form-control mb-1', **kwargs)|safe }}
+  </div>
+
+{% endmacro %}
+

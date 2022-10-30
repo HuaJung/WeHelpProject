@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} ERROR {% endblock %}
+
+{% block content %}
+<div class="card text-center">
+    <h3 class="card-header"><i class="bi bi-emoji-dizzy-fill"></i>
+    </h3>
+    <div class="card-body">
+      <h5 class="card-title mb-3">Sorry!</h5>
+      <p class="card-text mb-4">{{message}}</p>
+      <a href="/" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+{% endblock %}

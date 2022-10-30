@@ -1,0 +1,18 @@
+{% extends 'form-header.html' %}
+{% from '_formhelpers.html' import render_field %}
+    {% block form %}
+        <form method="POST" action="/signup">
+            {{ form.csrf_token }}
+            {{ render_field(form.name, placeholder='Name') }}
+            {{ render_field(form.username,placeholder='Username') }}
+            {{ render_field(form.password,placeholder='Password') }}
+            {{ render_field(form.confirm,placeholder='Enter your password again') }}
+            <div class="d-flex justify-content-center">{{ form.submit(class='btn btn-primary  mb-4') }}
+            </div>
+        </form>
+    {% endblock %}
+
+    
+
+
+

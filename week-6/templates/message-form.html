@@ -1,0 +1,18 @@
+{% extends 'form-header.html' %}
+{% from '_formhelpers.html' import render_field %}
+
+    {% block form_title %}
+    <i class="bi bi-chat-heart-fill me-1"></i> Let's Talk !
+    {% endblock %}
+
+    {% block form %}
+    <form method="POST" action="/message">
+        {{ form.csrf_token }}
+        <div class="mb-3">
+            {{ render_field(form.content, placeholder='Say Somthing...') }}
+            <div class="d-flex justify-content-center">{{ form.send(class='btn btn-sm btn-primary mb-4', value='Send') }}
+            </div>
+        </div>
+    </form>
+
+    {% endblock %}
