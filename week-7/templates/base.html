@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} HOME {% endblock %}</title>
+<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='/bootstrap-5.2.2-dist/css/bootstrap.min.css')}}">
+<script src="https://kit.fontawesome.com/6681bc69b6.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show small px-3 py-2 lh-1" role="alert">
+                    {% if category == 'success' %}
+                    <i class="fa-solid fa-circle-check"></i>
+                    {% elif category == 'warning' %}
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    {% elif category == 'danger' %}
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    {% endif %}
+                    {{ message }}
+                    <button type="button" class="btn-close p-2 lh-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+    {% block content %}
+    {% endblock %}
+
+    </div>
+
+    <script src="{{url_for('static', filename='/bootstrap-5.2.2-dist/js/bootstrap.min.js')}}"></script>
+
+    {% block script %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% from '_formhelpers.html' import formField %}
+
+{%block title%} LOGIN {% endblock %}
+
+{% block content %}
+
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        <h2 class="mb-3 text-center"><i class="fa-solid fa-circle-user"></i>  Sign In</h2>
+        <form action="/login" method="POST">
+            {{ form.csrf_token}}
+            {{ formField(form.username, 'username', autocomplete='off', autofocus=true) }}
+            {{ formField(form.password, 'password') }}
+            {{ formField(form.remember) }}
+            <div class="text-center">
+                {{ form.submit(class='btn btn-primary text-light') }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

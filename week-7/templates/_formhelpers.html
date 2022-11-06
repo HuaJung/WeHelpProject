@@ -1,0 +1,31 @@
+{% macro formField(fieldName, placeholderValue) %}
+
+{% if 'Update' in fieldName.label|safe %}
+<i class="fa-solid fa-pen-to-square"></i>
+{% elif 'Username' in fieldName.label|safe %}
+<i class="fa-solid fa-crown"></i>
+{% elif 'Password' in fieldName.label|safe %}
+<i class="fa-solid fa-lock"></i>
+{% elif 'Name' in fieldName.label|safe %}
+<i class="fa-solid fa-user"></i>
+{% endif %}
+
+{% if 'Remember' in fieldName.label|safe %}
+{{ fieldName(class='form-check-input mb-3')}}
+{{ fieldName.label(class='form-check-label')}}
+{% else %}
+
+{{ fieldName.label(class='form-label fw-bolder') }}
+{{ fieldName(class='form-control mb-3 fw-lighter', placeholder=placeholderValue, **kwargs) }}
+{% endif %}
+
+<!-- Error Message -->
+{% if fieldName.errors %}
+{% for error in fieldName.errors %}
+<div class="small lh-1 text-danger mb-4">
+    <i class="fa-solid fa-triangle-exclamation"></i> {{ error }}
+</div>
+{% endfor %}
+{% endif %}
+
+{% endmacro %}

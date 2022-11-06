@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+.panda-icon {
+    width: 40px;
+    height: 40px;
+}
+
+h2, label, button {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Chrome, Safari, Edge, Opera */
+/* Hide Input text and password key icon */
+input::-webkit-credentials-auto-fill-button {
+  -webkit-appearance: none;
+  visibility: hidden;   
+  margin: 0;
+}
