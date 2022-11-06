@@ -39,24 +39,28 @@ function search() {
 
 // onclick update button
 function update() {
-    const newName = {name: updateInput.value};
-    let url = new URL(`${window.origin}/api/member`);
-    fetch(url, {
-        'method': 'PATCH',
-        'headers': {'Content-Type': 'application/json'},
-        'body': JSON.stringify(newName),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.ok === true) {
-            newDiv.textContent = 'update successful!';
-        } else if (data.error === false) {
-            newDiv.textContent = 'fail to update!';
-        } else {
-            newDiv.textContent = 'something went wrong';
-        };
-        document.querySelector('#update-card').appendChild(newDiv);
-    });
+    if (updateInput.value === '' || updateInput.value === ' '){
+        newDiv.textContent = 'cannot leave blank';
+    } else {
+        const newName = {name: updateInput.value};
+        let url = new URL(`${window.origin}/api/member`);
+        fetch(url, {
+            'method': 'PATCH',
+            'headers': {'Content-Type': 'application/json'},
+            'body': JSON.stringify(newName),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok === true) {
+                newDiv.textContent = 'update successful!';
+            } else if (data.error === true) {
+                newDiv.textContent = 'style is incorrect';
+            } else {
+                newDiv.textContent = 'something went wrong';
+            };
+        });
+    };
+    document.querySelector('#update-card').appendChild(newDiv);
 };
 
 

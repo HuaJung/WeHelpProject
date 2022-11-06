@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, flash, session, jso
 from wtf import *
 from db import data_query_one, insert_or_update
 import secrets
+import re
 
 app = Flask(__name__, static_folder='panda', static_url_path='/')
 app.config['SECRET_KEY'] = secrets.token_urlsafe(16)
@@ -41,7 +42,7 @@ def login():
     return render_template('login-form.html', form=form)
 
 
-@app.route('/member', methods=['POST', 'GET'])
+@app.route('/member')
 def member():
     if 'user-id' in session:
         form = UpdateForm()
@@ -49,7 +50,6 @@ def member():
         name_sql = 'SELECT name FROM member WHERE id=%s'
         name = data_query_one(name_sql, (user_id,))[0]
         return render_template('member.html', name=name, form=form)
-
     else:
         flash('Please Sign In', 'danger')
         return redirect('/login')
@@ -65,27 +65,35 @@ def logout():
 
 @app.route('/api/member', methods=['PATCH', 'GET'])
 def api():
-    if request.method == 'PATCH':
-        if 'user-id' in session:
+    pattern = r"^[^-\s][A-Za-z0-9\u4e00-\u9fa5a\s]*$"  # no special characters are allowed
+    if 'user-id' in session and request.method == 'PATCH':
+        if request.is_json:
             update_dic = request.get_json()
-            print(update_dic)
             new_name = update_dic['name']
-            user_id = session['user-id']
-            name_sql = 'UPDATE member SET name=%s WHERE id=%s'
-            insert_or_update(name_sql, (new_name, user_id))
-            return make_response(jsonify(ok=True))
-        return make_response(jsonify(error=True))
-    else:
-        username = request.args.get('username', '')
+            if re.findall(pattern, new_name):
+                user_id = session['user-id']
+                name_sql = 'UPDATE member SET name=%s WHERE id=%s'
+                insert_or_update(name_sql, (new_name, user_id))
+                return make_response(jsonify(ok=True), 200)
+        return make_response(jsonify(error=True), 400)
+    elif 'user-id' in session and request.args.get('username'):
+        username = request.args.get('username')
         username_sql = 'SELECT id, name, username FROM member WHERE username=%s'
         record = data_query_one(username_sql, (username,))
         data = {}
-        if record and 'user-id' in session:
+        if record:
             data['id'] = record[0]
             data['name'] = record[1]
             data['username'] = record[2]
-            return jsonify({'data': data})
-        return jsonify(data=None)
+            return make_response(jsonify({'data': data}), 200)
+        else:  # the username does not exist
+            return make_response(jsonify(data=None), 200)
+    elif 'user-id' in session:  # does not provide any query string
+        return make_response(jsonify(data=None), 400)
+    elif 'user-id' not in session and request.method == 'PATCH':
+        return make_response(jsonify(error=True), 403)
+    else:
+        return make_response(jsonify(data=None), 403)
 
 
 app.run(port=3000, debug=True)

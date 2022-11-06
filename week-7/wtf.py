@@ -21,8 +21,7 @@ class RegisterForm(FlaskForm):
     name = StringField('Your Name', [InputRequired()])
     username = StringField('Username', [InputRequired(),
                                         Length(min=2, max=20, message='username must between 4 and 20 characters'),
-                                        Regexp('^\\S*$',
-                                               message='space is not allowed')])
+                                        Regexp('^\\S*$', message='space is not allowed')])
     password = PasswordField('Password', [InputRequired(),
                                           Length(min=4, max=20, message='password must between 4 and 20 characters')])
     confirm = PasswordField('Confirm Your Password', [InputRequired(),
@@ -51,6 +50,7 @@ class LoginForm(FlaskForm):
 
 class UpdateForm(FlaskForm):
     """ Update Member's Name Form """
-    update = StringField('Update My Name')
+    update = StringField('Update My Name', [InputRequired(message='please enter your new name'),
+                                            Regexp('^\\S', message='please enter a valid name')])
     submit = SubmitField('Update')
 
