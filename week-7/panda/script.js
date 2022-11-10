@@ -18,7 +18,7 @@ updateInput.addEventListener('keypress', (e)=> {
     };
 });
 
-// onclick serach button
+// onclick search button
 function search() {
     const usernameEntered = serachInput.value;
     let url = new URL(`${window.origin}/api/member`); 
